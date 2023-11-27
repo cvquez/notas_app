@@ -49,27 +49,6 @@ Este proyecto consta de dos partes: el backend construido con Django 4.2.7 y el 
     pip install -r requirements.txt
     ```
 
-### Configuración de la Base de Datos (PostgreSQL)
-
-1. Asegúrate de tener PostgreSQL instalado y configurado en tu sistema.
-
-2. Crea una base de datos llamada "notes" en PostgreSQL.
-
-3. Actualiza la configuración de la base de datos en `backend/settings.py`. Asegúrate de configurar las credenciales correctas para tu base de datos PostgreSQL:
-
-    ```python
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'notes',
-            'USER': 'tu_usuario',
-            'PASSWORD': 'tu_contraseña',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
-    ```
-
 ### Aplicación de Migraciones y Creación de Superusuario
 
 1. Aplica las migraciones:
