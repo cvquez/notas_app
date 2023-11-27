@@ -1,0 +1,117 @@
+<div class="flex flex-col w-full md:flex-row">
+  <div
+    class="grid flex-grow card bg-base-300 rounded-box place-content-start p-4"
+  >
+    <h1 class="text-center pb-4">Notas</h1>
+    <form #isFormValid="ngForm" [formGroup]="noteFormGroup" class="form-group">
+      <div class="form-control">
+        <!-- name -->
+        <label for="title" class="label">Titulo</label>
+        <input
+          type="text"
+          class="input input-bordered input-primary w-full max-w-xs"
+          name="title"
+          formControlName="title"
+          id="title"
+          placeholder="Escriba el titulo"
+        />
+
+        <!-- title errors -->
+        <div *ngIf="title?.touched && title?.invalid">
+          <small class="text-error" *ngIf="title?.errors?.['required']"
+            >Titulo es obligatorio</small
+          >
+          <small class="text-error" *ngIf="title?.errors?.['minlength']"
+            >Titulo es muy corto</small
+          >
+          <small class="text-error" *ngIf="title?.errors?.['maxlength']"
+            >Titulo es muy largo</small
+          >
+        </div>
+      </div>
+
+      <!-- body -->
+      <div class="form-control">
+        <label for="body" class="label">Contenido</label>
+        <textarea
+          class="textarea textarea-primary w-full max-w-xs"
+          name="body"
+          formControlName="body"
+          id="body"
+          placeholder="body"
+        ></textarea>
+
+        <!-- body errors -->
+        <div *ngIf="body?.touched && body?.invalid">
+          <small class="text-error" *ngIf="body?.errors?.['required']"
+            >Contenido es obligatorio</small
+          >
+          <small class="text-error" *ngIf="body?.errors?.['maxlength']"
+            >Contenido es muy largo</small
+          >
+        </div>
+      </div>
+
+      <!-- create(Add) or Update(put) -->
+      <div class="my-3">
+        <!-- create -->
+        <button
+          *ngIf="!addOrPut"
+          (click)="postNote()"
+          class="btn btn-primary"
+          [disabled]="!isFormValid.valid"
+        >
+          Agregar
+        </button>
+        <!-- Update -->
+        <button
+          *ngIf="addOrPut"
+          (click)="putNote()"
+          class="btn btn-secondary"
+          [disabled]="!isFormValid.valid"
+        >
+          Actualizar
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="divider lg:divider-horizontal"></div>
+  <div class="grid flex-grow card bg-base-300 rounded-box place-items-center">
+    <div class="overflow-y-auto h-96">
+      <table class="table table-pin-cols">
+        <thead>
+          <tr>
+            <th>#Id</th>
+            <th>Titulo</th>
+            <th>Contenido</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if(array.length ==0){
+          <tr>
+            <td colspan="5" class="skeleton w-full text-center">Sin datos</td>
+          </tr>
+          }@else{
+          <tr *ngFor="let eachCmd of array">
+            <td scope="row">{{ eachCmd.id }}</td>
+            <td>{{ eachCmd.title }}</td>
+            <td>{{ eachCmd.body }}</td>
+            <td>
+              <button (click)="editNote(eachCmd)" class="btn btn-warning">
+                Editar
+              </button>
+            </td>
+            <td>
+              <button (click)="deleteNote(eachCmd.id)" class="btn btn-danger">
+                Borrar
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
