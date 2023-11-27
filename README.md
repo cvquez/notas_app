@@ -103,11 +103,17 @@ El backend estará disponible en [http://localhost:8000/](http://localhost:8000/
     ```bash
     cd frontend
     ```
+   
+2. Instalar Angular 17:
 
-2. Instala las dependencias de Angular:
+   ```bash
+    npm install -g @angular/cli
+    ```
+
+3. Instala las dependencias de Angular:
 
     ```bash
-    npm install
+    yarn install
     ```
 
 ### Ejecutar el Servidor de Desarrollo
